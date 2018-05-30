@@ -35,13 +35,13 @@ class CreateContentCommand extends ContainerAwareCommand
 
     protected function execute( InputInterface $input, OutputInterface $output )
     {
-/** @var $repository \eZ\Publish\API\Repository\Repository */
-$repository = $this->getContainer()->get( 'ezpublish.api.repository' );
-$contentService = $repository->getContentService();
-$locationService = $repository->getLocationService();
-$contentTypeService = $repository->getContentTypeService();
+        /** @var $repository \eZ\Publish\API\Repository\Repository */
+        $repository = $this->getContainer()->get( 'ezpublish.api.repository' );
+        $contentService = $repository->getContentService();
+        $locationService = $repository->getLocationService();
+        $contentTypeService = $repository->getContentTypeService();
 
-        $repository->setCurrentUser( $repository->getUserService()->loadUser( 14 ) );
+        $this->getRepository()->getPermissionResolver()->setCurrentUserReference( $this->getRepository()->getUserService()->loadUser( 14 ) );
 
         // fetch the input arguments
         $parentLocationId = $input->getArgument( 'parentLocationId' );
